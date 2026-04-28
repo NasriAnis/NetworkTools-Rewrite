@@ -115,6 +115,7 @@ void ping(char **tokens)
   return;
 }
 
+// Protocol to calculate checksum of the packet for ICMP
 unsigned short calculate_checksum(void *b, int len)
 {
   unsigned short *buf = b;

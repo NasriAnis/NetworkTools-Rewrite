@@ -6,30 +6,37 @@
 
 #include "../src/NetworkScans/include/ping.h"
 
-int main(){
-  int count;
-  char user_input[50];
+int main(int argc, char *argv[]){
+  if (argc == 0)
+  {
+    int count;
+    char user_input[50];
 
-  printf("Welcome to the Network Spoofer !\n");
+    printf("Welcome to the Network Tools !\n");
 
-  while(1) {
-    printf("> ");
-    fgets(user_input, 49, stdin);
-    char **tokens = tokenize(user_input);
+    while(1) {
+      printf("> ");
+      fgets(user_input, 49, stdin);
+      char **tokens = tokenize(user_input);
 
-    for (int i = 0; i>=0; i++){
-      if (tokens[i]==NULL){
-        count = i;
-        break;
+      for (int i = 0; i>=0; i++){
+        if (tokens[i]==NULL){
+          count = i;
+          break;
+        }
       }
-    }
 
-    if (strcmp(tokens[0], "ping") == 0){
-      ping(tokens);
-    }
+      if (strcmp(tokens[0], "ping") == 0){
+        ping(tokens);
+      }
 
-    // free tokens before reusing
-    free(tokens);
+      // free tokens before reusing
+      free(tokens);
+    }
+  }
+
+  else
+  {
   }
   return 0;
 }
