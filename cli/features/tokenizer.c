@@ -1,8 +1,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-// Parse user input into tokens
-char** tokenize(char *input){
+char** tokenize(char *input)
+{
+/* Parse user input into tokens
+* Return a pointer to pointers
+* allocated using malloc + a
+* NULL delimiter at the end. */
+
   char **token_alloc = NULL;
   char *token;
   char **tmp;
@@ -10,7 +15,14 @@ char** tokenize(char *input){
 
   token = strtok(input, " ");
 
-  while (token != NULL){
+  while (token != NULL)
+  {
+
+    if (strcmp(token, "\n") == 0) {
+      token = strtok(NULL,  " ");
+      continue;
+    }
+
     tmp = realloc(token_alloc, i * sizeof(char*));
 
     if (tmp == NULL){
@@ -28,9 +40,7 @@ char** tokenize(char *input){
   }
 
   // adding a NULL delimiter
-  i++;
   tmp = realloc(token_alloc, i * sizeof(char*));
-
   if (tmp == NULL){
     free(tmp);
     return NULL;
