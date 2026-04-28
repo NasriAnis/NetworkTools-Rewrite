@@ -58,7 +58,26 @@ void ping(char **tokens)
   icmp_header.type = ICMP_ECHO;
   icmp_header.code = 0;
 
-  // these are unions from linux
+  // unions from linux
+
+  // struct icmphdr {
+  //   __u8		type;
+  //   __u8		code;
+  //   __sum16	checksum;
+  //   union {
+  //     struct {
+  //       __be16	id;
+  //       __be16	sequence;
+  //     } echo;
+  //     __be32	gateway;
+  //     struct {
+  //       __be16	__unused;
+  //       __be16	mtu;
+  //     } frag;
+  //     __u8	reserved[4];
+  //   } un;
+  // };
+
   icmp_header.un.echo.id = getpid();
   icmp_header.un.echo.sequence = 1;
 
@@ -86,7 +105,7 @@ void ping(char **tokens)
   // inet_ntoa : (Internet Network to ASCII)
   // converts a 32-bit IPv4 network byte order address
   // into a dotted-decimal string (e.g., "192.168.0.1")
-
+  // 
   else {
     printf("Received reply from %s : \n", inet_ntoa(source_address.sin_addr));
   }
