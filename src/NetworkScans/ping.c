@@ -59,6 +59,7 @@ void ping(char **tokens)
   icmp_header.code = 0;
 
   // unions from linux
+  // https://github.com/torvalds/linux/blob/master/include/uapi/linux/icmp.h
 
   // struct icmphdr {
   //   __u8		type;
